@@ -1,0 +1,339 @@
+/* cards.css */
+
+.courses-grid-container {
+  display: flex; /* Usamos flexbox */
+  flex-direction: column; /* Para que las tarjetas se apilen verticalmente */
+  align-items: center; /* Centra las tarjetas si su ancho es menor al contenedor */
+  gap: 20px; /* Espacio entre las tarjetas */
+  padding: 20px;
+  max-width: 1000px; /* Reducido para simular un contenedor más ajustado */
+  margin: 20px auto; /* Centrar el contenedor */
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+}
+
+.course-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  width: 100%; /* La tarjeta ocupa el 100% del ancho de su contenedor */
+  max-width: 960px; /* Opcional: Un máximo para que no sea demasiado ancha en pantallas muy grandes */
+}
+
+.card-header {
+  background-color: #007bff; /* Color azul, ajustable */
+  color: #ffffff;
+  padding: 20px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  text-align: center; /* Centrar el texto en el header */
+}
+
+.course-title {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.course-subtitle {
+  font-size: 0.9em;
+  opacity: 0.9;
+  margin-bottom: 0;
+}
+
+.card-body {
+  padding: 20px;
+  flex-grow: 1; /* Permite que el cuerpo ocupe el espacio restante */
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  /* Cambiado de section-heading a section-title para coincidir con tu CSS */
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  color: #333333;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 5px;
+  text-align: center; /* Centrar el título "Módulos" */
+}
+
+.timeline {
+  display: flex;
+  gap: 15px; /* Espacio entre los módulos */
+  margin-bottom: 20px;
+  overflow-x: auto; /* Permite scroll si hay muchas semanas */
+  padding-bottom: 10px; /* Espacio para la barra de scroll */
+  position: relative;
+  align-items: flex-start; /* Alinea los ítems en la parte superior */
+  /* Estilos del scrollbar para navegadores basados en WebKit (Chrome, Safari) */
+  scrollbar-width: thin; /* Para Firefox */
+  scrollbar-color: #888 #f1f1f1; /* Para Firefox */
+}
+
+.timeline::-webkit-scrollbar {
+  height: 8px; /* Altura del scrollbar horizontal */
+}
+
+.timeline::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.timeline::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.timeline::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.week {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Alinea el contenido hacia arriba */
+  padding: 10px; /* Ajustado para dar más espacio interno */
+  border-radius: 8px;
+  background-color: #f8f9fa; /* Color de fondo por defecto para inactivo/no disponible */
+  color: #666;
+  font-size: 0.85em;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  flex-shrink: 0; /* Evita que las semanas se encojan */
+  z-index: 1;
+
+  /* ----- TAMAÑO FIJO PARA TODAS LAS CAJAS DE MÓDULO ----- */
+  width: 130px; /* Ancho fijo deseado para todas las cajas de módulo */
+  height: 130px; /* Altura fija deseada para todas las cajas de módulo */
+  min-width: 130px; /* Asegura que no se encojan */
+  box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+  /* -------------------------------------------------- */
+}
+
+.week-number {
+  font-weight: bold;
+  font-size: 1.5em; /* Tamaño del número */
+  margin-bottom: 8px; /* Ajuste del margen para separar del texto */
+  background-color: #e9ecef; /* Fondo para el número */
+  border-radius: 50%;
+  width: 42px; /* Tamaño del círculo del número */
+  height: 42px; /* Tamaño del círculo del número */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  border: 1px solid #dee2e6;
+  color: #495057; /* Color de texto por defecto para el número */
+}
+
+.week-dates {
+  /* Nombre del módulo/sección */
+  font-size: 0.9em; /* Tamaño del texto del nombre del módulo */
+  white-space: normal; /* Permite que el texto se envuelva */
+  text-align: center;
+  word-break: break-word; /* Para romper palabras largas si es necesario */
+  flex-grow: 1; /* Permite que ocupe el espacio disponible */
+  display: flex; /* Para centrar el texto verticalmente si es corto */
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2; /* Espaciado de línea para mejor legibilidad */
+  margin: 0; /* Elimina márgenes de párrafo por defecto */
+  color: #343a40; /* Color de texto más oscuro para el nombre */
+  /* Asegúrate de que este texto no se desborde */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limita a dos líneas */
+  -webkit-box-orient: vertical;
+}
+
+/* Nuevas clases para los iconos */
+.module-icon-placeholder {
+  font-size: 1.5em; /* Tamaño del icono de la caja */
+  color: #007bff; /* Color azul */
+  margin-top: 5px; /* Espacio sobre el icono */
+}
+
+.completion-check {
+  position: absolute;
+  bottom: 5px; /* Posición inferior para el checkmark */
+  right: 5px; /* Posición derecha para el checkmark */
+  font-size: 1.2em;
+  color: #28a745; /* Color verde para el check */
+  background-color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para semanas completadas (verdes) */
+.week.completed {
+  background-color: #d4edda; /* Verde claro */
+  color: #155724; /* Verde oscuro para texto */
+}
+.week.completed .week-number {
+  background-color: #28a745; /* Verde Bootstrap */
+  color: #ffffff;
+  border-color: #28a745;
+}
+
+/* Estilos para la semana actual / habilitada (azul) */
+.week.current {
+  background-color: #cce5ff; /* Azul claro */
+  color: #004085; /* Azul oscuro para texto */
+  font-weight: bold;
+  border: 1px solid #007bff; /* Borde azul para el actual */
+}
+.week.current .week-number {
+  background-color: #007bff; /* Azul Bootstrap */
+  color: #ffffff;
+  border-color: #007bff;
+}
+
+/* Estilos para semanas NO DISPONIBLES (gris) */
+.week.unavailable {
+  background-color: #f0f2f5; /* Un gris muy claro */
+  color: #929292; /* Un gris medio para el texto */
+  border: 1px solid #d4d4d4; /* Borde sutil */
+  opacity: 0.8; /* Ligeramente deshabilitado */
+  cursor: not-allowed; /* Indica que no es clicable */
+}
+.week.unavailable .week-number {
+  background-color: #e0e0e0; /* Fondo gris para el número */
+  color: #a0a0a0; /* Texto gris para el número */
+  border-color: #e0e0e0;
+}
+
+.course-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.grade-info {
+  text-align: right;
+  line-height: 1.2;
+}
+
+.grade-label {
+  font-size: 0.8em;
+  color: #666666;
+  margin-bottom: 3px;
+}
+
+.grade-value {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #007bff; /* Color del valor de la calificación */
+  margin: 0;
+}
+
+/* Responsive adjustments for cards */
+@media (max-width: 768px) {
+  .courses-grid-container {
+    padding: 15px;
+  }
+
+  .course-card {
+    max-width: 100%;
+  }
+
+  .course-title {
+    font-size: 1.3em;
+  }
+
+  .course-subtitle {
+    font-size: 0.8em;
+  }
+
+  .timeline {
+    justify-content: flex-start;
+  }
+
+  .course-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .grade-info {
+    text-align: left;
+    width: 100%;
+  }
+
+  /* Ajustes para los módulos en pantallas pequeñas */
+  .week {
+    width: 110px; /* Un poco más pequeños en móviles */
+    height: 110px;
+    min-width: 110px;
+    padding: 8px; /* Reducir padding */
+  }
+
+  .week-number {
+    width: 36px;
+    height: 36px;
+    font-size: 1.4em;
+  }
+
+  .week-dates {
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ajustes adicionales para los módulos en pantallas muy pequeñas */
+  .week {
+    width: 100px; /* Aún más pequeños para asegurar que quepan más */
+    height: 100px;
+    min-width: 100px;
+    padding: 6px; /* Reducir padding */
+  }
+
+  .week-number {
+    width: 32px;
+    height: 32px;
+    font-size: 1.3em;
+  }
+
+  .week-dates {
+    font-size: 0.8em;
+  }
+}

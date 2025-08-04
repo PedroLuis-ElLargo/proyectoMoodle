@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  list-style: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  position: relative;
+  z-index: 10;
+}
+
+.logo img {
+  height: 75px;
+  object-fit: contain;
+}
+
+.whatsapp {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-weight: 600;
+  padding: 8px 15px;
+  text-decoration: none;
+  font-size: 14px;
+  position: absolute;
+  top: 20px; /* Distancia desde la parte superior */
+  right: 40px; /* Distancia desde la derecha */
+}
+
+.whatsapp a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #25d366; /* Color del texto del enlace de WhatsApp */
+  text-decoration: none;
+}
+
+.whatsapp a:hover {
+  background: #f3f3f3;
+}
+
+.whatsapp svg {
+  width: 20px;
+  height: 20px;
+  fill: #25d366;
+}
+
+.log-out {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  gap: 5px;
+}
+.log-out button {
+  border: none;
+  color: black;
+  padding: 4px 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: white;
+  border: 2px solid #f44336;
+}
+.log-out button:hover {
+  background: #da190b;
+  color: white;
+}
+
+.log-out svg {
+  width: 20px;
+  height: 20px;
+  fill: #000000;
+}
+
+/* --- Media Queries para Responsividad del Header --- */
+
+/* Para pantallas más pequeñas (ej. tablets y móviles) */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column; /* Apila los elementos verticalmente */
+    justify-content: center; /* Centra los elementos apilados */
+    align-items: center; /* Centra los elementos horizontalmente */
+    padding: 15px 20px; /* Reduce el padding */
+  }
+
+  .logo {
+    width: 100%; /* El logo ocupa todo el ancho */
+    text-align: center; /* Centra el logo */
+    margin-bottom: 15px; /* Espacio debajo del logo */
+  }
+
+  .logo img {
+    height: 60px; /* Reduce un poco el tamaño del logo */
+  }
+
+  .whatsapp {
+    position: static; /* Asegura que la posición sea estática para que Flexbox la maneje */
+    margin-top: 15px; /* Espacio encima de la sección de WhatsApp */
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Centra el texto */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    gap: 8px; /* Reduce el espacio entre elementos */
+    padding: 0; /* Elimina el padding extra si no es necesario */
+  }
+
+  .whatsapp p {
+    margin-bottom: 5px; /* Espacio entre la pregunta y el botón de WhatsApp */
+    font-size: 13px; /* Tamaño de fuente más pequeño */
+  }
+
+  .whatsapp a {
+    font-size: 13px; /* Tamaño de fuente más pequeño para el botón */
+    padding: 6px 12px; /* Ajusta el padding del botón */
+    border: 1px solid #25d366; /* Borde al botón para que se vea como un botón */
+    border-radius: 5px;
+    color: #25d366;
+    background-color: #f8f8f8; /* Fondo ligero para el botón */
+  }
+
+  .whatsapp a:hover {
+    background-color: #e0ffe0; /* Cambio de color al pasar el ratón */
+  }
+
+  .log-out {
+    margin-left: 0; /* Elimina el margen a la izquierda */
+    margin-top: 10px; /* Espacio encima del botón de cerrar sesión */
+    justify-content: center; /* Centra el botón de cerrar sesión */
+    width: 100%; /* Ocupa todo el ancho */
+  }
+}
+
+/* Para pantallas muy pequeñas (ej. móviles en modo vertical) */
+@media (max-width: 480px) {
+  header {
+    padding: 10px 15px; /* Reduce aún más el padding */
+  }
+
+  .logo img {
+    height: 50px; /* Logo más pequeño */
+  }
+
+  .whatsapp {
+    font-size: 12px; /* Texto más pequeño */
+  }
+
+  .whatsapp a {
+    font-size: 12px; /* Botón más pequeño */
+    padding: 5px 10px;
+  }
+
+  .log-out button {
+    font-size: 12px; /* Texto de botón de cerrar sesión más pequeño */
+    padding: 3px 8px;
+  }
+}

@@ -1,0 +1,7 @@
+# ignorar los archivos de node y sus dependencias en .gitignore
+backend-moodle/node_modules/
+backend-moodle/.env
+backend-moodle/**/.env
+
+# Ignorar todos los archivos JSON
+backend-moodle/src/utils/data/*.json
