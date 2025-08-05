@@ -4,6 +4,11 @@ const { isAuthenticated } = require("../middlewares/auth.middleware.js");
 const router = express.Router();
 
 // Redirigir directamente a Moodle
+router.get(
+  "/moodle/course/:courseId/section/:sectionId",
+  isAuthenticated,
+  ssoController.redirectToMoodle
+);
 router.get("/moodle", isAuthenticated, ssoController.redirectToMoodle);
 router.get(
   "/moodle/course/:courseId",

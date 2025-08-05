@@ -5,7 +5,7 @@ const { logRequestToFile } = require("../utils/requestLogger");
  * Maneja la redirección SSO a Moodle
  */
 async function redirectToMoodle(req, res) {
-  const { courseId, moduleId } = req.params;
+  const { courseId, moduleId, sectionId } = req.params;
   const userData = {
     username: req.user.username,
     moodleUserId: req.user.moodleUserId,
@@ -16,6 +16,9 @@ async function redirectToMoodle(req, res) {
 
     if (courseId) {
       redirectUrl = `${process.env.MOODLE_URL}/course/view.php?id=${courseId}`;
+    }
+    if (sectionId) {
+      redirectUrl = `${process.env.MOODLE_URL}/course/view.php?id=${courseId}#section-${sectionId}`;
     }
 
     if (moduleId) {
@@ -28,6 +31,7 @@ async function redirectToMoodle(req, res) {
     logRequestToFile("/api/sso/moodle", req.user.username, {
       action: "SSO redirect",
       courseId: courseId || null,
+      sectionId: sectionId || null,
       moduleId: moduleId || null,
       redirectUrl: redirectUrl,
     });

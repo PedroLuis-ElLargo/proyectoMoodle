@@ -12,6 +12,7 @@ function generateSSOToken(userData, secret) {
   const nonce = crypto.randomBytes(16).toString("hex");
 
   const payload = {
+    id: userData.moodleUserId,
     username: userData.username,
     email: userData.email || `${userData.username}@yourdomain.com`,
     firstname: userData.firstname || userData.username,

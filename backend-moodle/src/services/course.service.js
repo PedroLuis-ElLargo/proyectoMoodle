@@ -19,7 +19,7 @@ async function getUserCourses(userId) {
       id: course.id,
       shortname: course.shortname,
       fullname: course.fullname,
-      viewurl: `/api/sso/moodle/course/${course.id}`,
+      viewurl: `http://localhost:3000/api/sso/moodle/course/${course.id}`,
       progress: course.progress || null,
       completed: course.completed || false,
     }));
@@ -67,6 +67,7 @@ async function getCourseContents(courseId) {
       id: section.id,
       name: section.name,
       moduleCount: section.modules?.length || 0,
+      viewurl: `http://localhost:3000/api/sso/moodle/course/${courseId}/section/${section.id}`,
     }));
   } catch (error) {
     throw error;
