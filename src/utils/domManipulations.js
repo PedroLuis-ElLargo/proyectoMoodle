@@ -14,27 +14,23 @@ export function createCourseCard(course, sections = []) {
   const courseName = course.fullname || "Curso Desconocido";
   const courseId = course.id;
 
-  let sectionsTimelineHtml = ""; // Contendrá los bloques de sección
+  let sectionsTimelineHtml = "";
   if (sections.length > 0) {
     sections.forEach((section, index) => {
-      const sectionNumber = index + 1; // Para la numeración en el círculo
-      const sectionDisplayName = section.name; // Nombre de la sección (ej. "General", "Tema 1")
+      const sectionNumber = index + 1;
+      const sectionDisplayName = section.name;
 
-      // Por ahora, no hay lógica de completado o actual con la info del backend.
-      // Usamos 'current' si es la primera sección para simular el ejemplo de la imagen.
-      // Puedes ajustar esta lógica si tu backend te da el estado "completado" o "actual".
       let weekClasses = "week";
       if (index === 0) {
-        // Ejemplo: si es el primer elemento, lo marcamos como 'completed' y 'current' para que se vea verde y azul.
-        weekClasses += " completed current"; // Para tener el tick verde y el color azul base.
+        weekClasses += " completed current";
       } else if (index === 1) {
-        // Ejemplo: el segundo como 'current'
         weekClasses += " current";
       } else {
-        weekClasses += " unavailable"; // Los demás como 'unavailable'
+        weekClasses += " unavailable";
       }
 
       sectionsTimelineHtml += `
+      
         <div class="${weekClasses}">
           <div class="week-number">
             <span>${sectionNumber}</span>
@@ -68,11 +64,22 @@ export function createCourseCard(course, sections = []) {
     </div>
   `;
 
+  // Agregar el evento de clic al enlace de la sección
+  card.querySelectorAll(".timeline-link").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault(); // Evitamos que el enlace navegue de forma normal
+      const url = link.dataset.url;
+      if (url) {
+        window.open(url, "moodle_window"); // Usamos el MISMO nombre de ventana
+      }
+    });
+  });
+
   // El botón "IR A LA ASIGNATURA"
   const goToCourseBtn = card.querySelector(".btn-primary");
   goToCourseBtn.addEventListener("click", () => {
     if (course.viewurl) {
-      window.open(course.viewurl, "_blank");
+      window.open(course.viewurl, "moodle_window");
     } else {
       console.warn(
         `URL de vista de curso no disponible para el curso ID: ${courseId}`
