@@ -19,6 +19,7 @@ export function createCourseCard(course, sections = []) {
     sections.forEach((section, index) => {
       const sectionNumber = index + 1;
       const sectionDisplayName = section.name;
+      const sectionUrl = section.viewurl;
 
       let weekClasses = "week";
       if (index === 0) {
@@ -30,7 +31,9 @@ export function createCourseCard(course, sections = []) {
       }
 
       sectionsTimelineHtml += `
-      
+      <a href="${sectionUrl}" class="timeline-link" data-url="${sectionUrl}" title="Ir a ${
+        section.name
+      }">
         <div class="${weekClasses}">
           <div class="week-number">
             <span>${sectionNumber}</span>
