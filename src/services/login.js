@@ -1,7 +1,9 @@
 // src/services/login.js
+import { config } from "../config.js";
+
 export async function loginUsuario({ username, password }) {
   try {
-    const response = await fetch("http://localhost:3000/api/auth/login", {
+    const response = await fetch(`${config.API_BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

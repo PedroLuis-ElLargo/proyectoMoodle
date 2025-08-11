@@ -1,10 +1,9 @@
 // src/services/courseService.js
-
-const API_BASE_URL = "http://localhost:3000/api";
+import { config } from "../config.js";
 
 export async function fetchUserCourses() {
   try {
-    const response = await fetch(`${API_BASE_URL}/moodle/courses`, {
+    const response = await fetch(`${config.API_BASE_URL}/moodle/courses`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +33,7 @@ export async function fetchUserCourses() {
 export async function fetchCourseModules(courseId) {
   try {
     const response = await fetch(
-      `${API_BASE_URL}/moodle/courses/${courseId}/modules`,
+      `${config.API_BASE_URL}/moodle/courses/${courseId}/modules`,
       {
         credentials: "include",
       }

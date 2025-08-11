@@ -1,4 +1,5 @@
 // src/utils/domManipulations.js
+import { config } from "../config.js";
 
 /**
  * Crea un elemento de tarjeta de curso HTML a partir de los datos del curso.
@@ -67,18 +68,16 @@ export function createCourseCard(course, sections = []) {
     </div>
   `;
 
-  // Agregar el evento de clic al enlace de la sección
   card.querySelectorAll(".timeline-link").forEach((link) => {
     link.addEventListener("click", (event) => {
-      event.preventDefault(); // Evitamos que el enlace navegue de forma normal
+      event.preventDefault();
       const url = link.dataset.url;
       if (url) {
-        window.open(url, "moodle_window"); // Usamos el MISMO nombre de ventana
+        window.open(url, "moodle_window");
       }
     });
   });
 
-  // El botón "IR A LA ASIGNATURA"
   const goToCourseBtn = card.querySelector(".btn-primary");
   goToCourseBtn.addEventListener("click", () => {
     if (course.viewurl) {

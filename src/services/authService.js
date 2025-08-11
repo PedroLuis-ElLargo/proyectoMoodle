@@ -1,10 +1,9 @@
 // src/services/authService.js
-
-const API_BASE_URL = "http://localhost:3000/api";
+import { config } from "../config.js";
 
 export async function logoutUser() {
   try {
-    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+    const response = await fetch(`${config.API_BASE_URL}/auth/logout`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
