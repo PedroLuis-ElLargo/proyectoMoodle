@@ -108,4 +108,59 @@ function logout(req, res) {
     .json({ success: true, message: "Sesión cerrada correctamente." });
 }
 
-module.exports = { login, logout };
+// Agregar al final del archivo existente:
+
+/**
+ * Maneja logout iniciado desde Moodle
+ */
+async function moodleLogout(req, res) {
+  const { username, token } = req.body;
+
+  try {
+    // Log del logout desde Moodle
+    logRequestToFile("/api/auth/moodle-logout", username, {
+      message: "Logout iniciado desde Moodle",
+      timestamp: new Date().toISOString(),
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Logout registrado correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error procesando logout: " + error.message,
+    });
+  }
+}
+
+/**
+ * Verifica estado de sesión
+ */
+async function checkSessionStatus(req, res) {
+  const userId = req.user.moodleUserId;
+  const username = req.user.username;
+
+  try {
+    // Verificar si el token sigue válido en Moodle (opcional)
+    // await callMoodleApi("core_webservice_get_site_info", {}, req.user.moodleToken);
+
+    res.json({
+      success: true,
+      sessionValid: true,
+      user: {
+        username: username,
+        moodleUserId: userId,
+      },
+    });
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      sessionValid: false,
+      message: "Sesión expirada en Moodle",
+    });
+  }
+}
+
+module.exports = { login, logout, moodleLogout, checkSessionStatus };

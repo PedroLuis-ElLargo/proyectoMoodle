@@ -1,6 +1,6 @@
-// services/courseService.js
 const { callMoodleApi } = require("../utils/apiClient");
 const MOODLE_CONFIG = require("../config/moodle.js");
+const { API_BASE_URL } = require("../utils/apiConfig.js");
 
 /**
  * Obtiene la lista de cursos de un usuario específico desde Moodle y los filtra.
@@ -14,12 +14,11 @@ async function getUserCourses(userId) {
       userid: userId,
     });
 
-    // Filtrar y mapear solo los campos necesarios para el frontend
     const filteredCourses = courses.map((course) => ({
       id: course.id,
       shortname: course.shortname,
       fullname: course.fullname,
-      viewurl: `http://localhost:3000/api/sso/moodle/course/${course.id}`,
+      viewurl: `${API_BASE_URL}/sso/moodle/course/${course.id}`,
       progress: course.progress || null,
       completed: course.completed || false,
     }));
@@ -43,7 +42,7 @@ async function getCourseCompletionStatus(userId, courseId) {
       "core_completion_get_activities_completion_status",
       { userid: userId, courseid: courseId }
     );
-    return result.statuses || []; // Siempre retorna array
+    return result.statuses || [];
   } catch (error) {
     if (error.message.includes("nocriteriaset")) {
       return [];
@@ -67,32 +66,13 @@ async function getCourseContents(courseId) {
       id: section.id,
       name: section.name,
       moduleCount: section.modules?.length || 0,
-      viewurl: `http://localhost:3000/api/sso/moodle/course/${courseId}/section/${section.id}`,
+      viewurl: `${API_BASE_URL}/sso/moodle/course/${courseId}/section/${section.id}`,
     }));
   } catch (error) {
     throw error;
   }
-  /*
-    // Mantener la estructura original de Moodle
-    return contents.map((section) => ({
-      id: section.id,
-      name: section.name,
-      modules: section.modules.map((module) => ({
-        id: module.id,
-        name: module.name,
-        modname: module.modname,
-        url:
-          module.url ||
-          `${MOODLE_CONFIG.url}/mod/${module.modname}/view.php?id=${module.id}`,
-        completion: module.completion || 0,
-        available: module.uservisible !== false,
-        description: module.description || "",
-        dates: module.dates || [],
-        contents: module.contents || [],
-      })),
-    }));
-*/
 }
+
 module.exports = {
   getUserCourses,
   getCourseCompletionStatus,
