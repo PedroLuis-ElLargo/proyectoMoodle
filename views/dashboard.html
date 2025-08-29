@@ -22,27 +22,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-    <!-- ------------------------------------------------------------------------------------- -->
-    <script>
-      setInterval(async () => {
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/auth/session-status",
-            {
-              credentials: "include",
-            }
-          );
-
-          if (response.status === 401) {
-            alert("Sesión cerrada desde Moodle. Será redirigido al login.");
-            window.location.href = "../index.html";
-          }
-        } catch (error) {
-          console.error("Error verificando sesión:", error);
-        }
-      }, 30000);
-    </script>
-    <!-- ------------------------------------------------------------------------------------- -->
   </head>
   <body>
     <header>
